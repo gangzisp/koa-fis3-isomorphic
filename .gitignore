@@ -4,6 +4,11 @@ ehthumbs.db
 
 # Folder config file
 Desktop.ini
+**/node_modules
+
+# Folder config file
+dist
+dev
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
