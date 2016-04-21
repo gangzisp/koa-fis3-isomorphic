@@ -1,61 +1,66 @@
-# fis3组件管理开发体系
 
-### 1、需要（推荐）安装的包
+# koa + fis3 + swig 前后端同构方案
+
+#### 1、需要安装的包
 * fis3
 * fis3-hook-commonjs
 * fis3-postpackager-loader
 * fis3-postprocessor-extras_uri
 * fis3-packager-smart
 * fis-parser-imweb-tpl
-* fis-parser-imweb-tplv2（测试中）
-* fis-parser-sass （兼容以前的）
-* fis-parser-node-sass （推荐）
+* fis-parser-imweb-tplv2
+* fis-parser-node-sass
 * fis-postprocessor-autoprefixer
 * fis-prepackager-csswrapper
+* fis3-parser-babel
+* fis3-parser-swig
 
-### 2、安装环境插件
+#### 2、安装环境插件
 
 注意安装0.12大版本的node，高版本的问题较多，可能报node-sass绑定错误
 
 ```
-npm install -g fis3 fis3-hook-commonjs fis3-postpackager-loader fis3-postprocessor-extras_uri fis-parser-imweb-tpl fis-parser-imweb-tplv2 fis-postprocessor-autoprefixer fis-prepackager-csswrapper fis3-parser-babel fis-postpackager-iconfont fis3-packager-smart fis3-parser-node-sass fis3-parser-babel
+npm install -g fis3 fis3-hook-commonjs fis3-postpackager-loader fis3-postprocessor-extras_uri fis-parser-imweb-tpl fis-parser-imweb-tplv2 fis-postprocessor-autoprefixer fis-prepackager-csswrapper fis3-parser-babel fis-postpackager-iconfont fis3-packager-smart fis3-parser-node-sass fis3-parser-babel fis3-parser-swig
 ```
 
-### 3、编译
+#### 3、前端编译
 这里提供了component管理的三种打包方式：
 
-切换至 `src` 目录下。src为同步构建，src-async构建，src-smart为smart根据包个数构建
 
 * 在 src 目录下执行如下命令开发调试
 
 ```
-fis3 release dev -wL // 开发，自动watch并刷新
-fis3 release dev -c // 开发，清除缓存重新构建
+fis3 server start --root ./dev     //启动调试服务器
+fis3 server start --root ./dev --port 80 // 开发目录
+fis3 server start --root ./dist --port 80 // 发布目录
 
-fis3 server start --root ../dev     //启动调试服务器
-fis3 server start --root ../dev --port 80 // 开发目录
-fis3 server start --root ../dist --port 80 // 发布目录
+fis3 release dev -wL // 前端开发调试，自动watch并刷新
+fis3 release dev -c // 前端开发调试，清除缓存重新构建
+
+fis3 release server -wL // 后端开发调试，自动watch并刷新
+fis3 release server -c  // 后端开发调试，清除缓存重新构建
+
+fis3 release dist   // 前端打包发布
+fis3 release deploy // 后端打包发布
+
 ```
 
-* 4、发布
+
+#### 4、后端编译
+
+进入server目录
+
 ```
-fis3 release dist
+npm install
+npm test   //调试
+npm start
 ```
-生成的 `dist` 目录即为可发布版本。
 
+#### 5、其它
 
-
-Koa MongoDB Example
-===================
-
-使用node运行
+需要安装启动mongodb
 ---
-
-1. 启动mongodb [MonoDB](https://www.mongodb.org/).
-
-&emsp;
-
-2. `npm install & npm start`
+启动mongodb [MonoDB](https://www.mongodb.org/)
 
 
 
