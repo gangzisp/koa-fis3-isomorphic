@@ -47,7 +47,7 @@ var page = {
     _ajaxData: function() {
         var self = this;
         $.localAjax({
-            url: 'data/indexPage.json',
+            url: 'mock/indexPage.json',
             method: 'get',
             dataType: 'json',
             data: {},

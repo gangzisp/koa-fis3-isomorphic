@@ -178,12 +178,12 @@ fis.media('server')
 fis.media('dev')
     .match('/*.html', {
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     })
     .match('{pkg, modules}/**.js', {
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     })
     // .match('**.js', {
@@ -200,22 +200,22 @@ fis.media('dev')
     .match('pkg/*/*.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     })
     .match('::image', {
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     })
     .match('**.{ttf, eot, tpl, png}', {
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     })
     .match('**.json', {
         deploy: fis.plugin('local-deliver', {
-            to: '../dev'
+            to: './dev'
         })
     });
 
@@ -224,6 +224,64 @@ fis.media('dev')
  *  压缩、合并、文件指纹
  */
 fis.media('dist')
+    .match('/*.html', {
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('**.{js,tpl}', {
+        useHash: true,
+        optimizer: fis.plugin('uglify-js')
+    })
+    .match('{pkg, modules}/**.js', {
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('**.js', {
+        parser: fis.plugin('babel'),
+        release: '$0',
+        rExt: '.js'
+    })
+    .match('pkg/*/*.{css,scss,sass}', {
+        useHash: true,
+        useSprite: true,
+        optimizer: fis.plugin('clean-css'),
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('::image', {
+        useHash: true,
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('**.png', {
+        useHash: true,
+        optimizer: fis.plugin('png-compressor'),
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('**.{ttf, eot}', {
+        useHash: true,
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    })
+    .match('**.json', {
+        deploy: fis.plugin('local-deliver', {
+            to: './dist'
+        })
+    });
+
+
+/**
+ * 发布
+ *  压缩、合并、文件指纹
+ */
+fis.media('deploy')
     .match('/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
