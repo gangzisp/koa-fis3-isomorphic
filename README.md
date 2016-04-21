@@ -1,6 +1,8 @@
 
 # koa + fis3 + swig 前后端同构方案
 
+[架构设计文章](https://ouvens.github.io/frontend-build/2016/04/21/koa-fis3-swig-nodejs-isomorphic.html)
+
 #### 1、需要安装的包
 * fis3
 * fis3-hook-commonjs
