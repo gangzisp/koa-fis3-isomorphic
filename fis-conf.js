@@ -7,10 +7,13 @@ fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
 fis.set('project.ignore', [
-  'server/**',
-  'node_modules/**',
-  '.git/**',
-  '.svn/**'
+    'server/**',
+    'node_modules/**',
+    '.git/**',
+    '.svn/**',
+    'fis-conf.js',
+    'package.json',
+    'README.md'
 ]);
 
 fis.match('**/_*.scss', {
@@ -35,7 +38,7 @@ fis.match('**/_*.scss', {
     //     release: false
     // })
 
-    .match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
+.match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
         isMod: true,
         rExt: 'js',
         id: '$1.tpl',
@@ -103,10 +106,10 @@ fis.match('**/_*.scss', {
         // domain: 'http://7.url.cn/edu/activity/' + name
     })
 
-    /**
-     * 添加同步打包配置,libs和modules默认打包二级目录的文件
-     */
-    .match(/(libs|modules)\/(js\/)?.+\/(.+)\.js$/i, {
+/**
+ * 添加同步打包配置,libs和modules默认打包二级目录的文件
+ */
+.match(/(libs|modules)\/(js\/)?.+\/(.+)\.js$/i, {
         packTo: '/libs/$3.js',
         isMod: true,
         id: '$3'
@@ -150,7 +153,7 @@ fis.media('server')
     //     })
     // })
 
-    .match('pkg/*/*.{css,scss,sass}', {
+.match('pkg/*/*.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
@@ -197,7 +200,7 @@ fis.media('dev')
     //     })
     // })
 
-    .match('pkg/*/*.{css,scss,sass}', {
+.match('pkg/*/*.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './dev'
