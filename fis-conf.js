@@ -152,8 +152,7 @@ fis.media('server')
     //         to: './server/pages'
     //     })
     // })
-
-.match('pkg/*/*.{css,scss,sass}', {
+    .match('**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
@@ -199,8 +198,7 @@ fis.media('dev')
     //         to: './server/pages'
     //     })
     // })
-
-.match('pkg/*/*.{css,scss,sass}', {
+    .match('**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './dev'

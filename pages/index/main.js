@@ -9,9 +9,9 @@ var getUrlParam = function(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
     var r = window.location.search.substr(1).match(reg); //匹配目标参数
     if (r != null) {
-        return unescape(r[2]); 
+        return unescape(r[2]);
     }
-    return null;                                        //返回参数值
+    return null; //返回参数值
 };
 
 var searchBar = require('search-bar');
@@ -36,9 +36,9 @@ var page = {
 
     _renderData: function() {
         var self = this;
-        if(window.r){
-            self._ajaxData(); 
-        }else{
+        if (window.r) {
+            self._ajaxData();
+        } else {
             self._initComponent();
             self._bindEvent();
         }
@@ -47,7 +47,7 @@ var page = {
     _ajaxData: function() {
         var self = this;
         $.localAjax({
-            url: 'mock/indexPage.json',
+            url: '../mock/indexPage.json',
             method: 'get',
             dataType: 'json',
             data: {},
@@ -69,7 +69,7 @@ var page = {
         slider.init(data && data.slider);
         banner2.init(data && data.banner2);
         banner3.init(data && data.banner3);
-            
+
         tab.init(data && data.tabs);
         panel3.init(data && data.panel3);
 
@@ -78,7 +78,7 @@ var page = {
     _bindEvent: function(data) {
 
         var self = this;
-        self.$el.on('click', '[data-href]', function(){
+        self.$el.on('click', '[data-href]', function() {
             /**
              * 按需加载处理方式
              */
