@@ -11,6 +11,7 @@ fis.set('project.ignore', [
     'node_modules/**',
     '.git/**',
     '.svn/**',
+    'dev/**',
     'fis-conf.js',
     'package.json',
     'README.md'
@@ -37,8 +38,7 @@ fis.match('**/_*.scss', {
     // .match('libs/**/*.js', {
     //     release: false
     // })
-
-.match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
+    .match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
         isMod: true,
         rExt: 'js',
         id: '$1.tpl',
@@ -132,7 +132,7 @@ fis.match('**/_*.scss', {
  * 开发
  */
 fis.media('server')
-    .match('/*.html', {
+    .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
         })
@@ -178,7 +178,7 @@ fis.media('server')
  * 开发
  */
 fis.media('dev')
-    .match('/*.html', {
+    .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: './dev'
         })
@@ -225,7 +225,7 @@ fis.media('dev')
  *  压缩、合并、文件指纹
  */
 fis.media('dist')
-    .match('/*.html', {
+    .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: './dist'
         })
@@ -244,7 +244,7 @@ fis.media('dist')
         release: '$0',
         rExt: '.js'
     })
-    .match('pkg/*/*.{css,scss,sass}', {
+    .match('**.{css,scss,sass}', {
         useHash: true,
         useSprite: true,
         optimizer: fis.plugin('clean-css'),
@@ -283,7 +283,7 @@ fis.media('dist')
  *  压缩、合并、文件指纹
  */
 fis.media('deploy')
-    .match('/*.html', {
+    .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
         })
@@ -302,7 +302,7 @@ fis.media('deploy')
         release: '$0',
         rExt: '.js'
     })
-    .match('pkg/*/*.{css,scss,sass}', {
+    .match('**.{css,scss,sass}', {
         useHash: true,
         useSprite: true,
         optimizer: fis.plugin('clean-css'),

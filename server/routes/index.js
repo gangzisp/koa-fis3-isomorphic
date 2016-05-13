@@ -11,8 +11,8 @@ const dataMock = require('../mock/indexPage');
 exports.indexPage = function*() {
     var results = yield todos.find({});
     var data = dataMock.result;
-
-    this.body = yield pages('index', { 
+    console.log(data);
+    this.body = yield pages('pages/index', { 
             pageMenu: data.pageMenu,
             keywords: data.keywords,
             banner2: data.banner2,
@@ -68,7 +68,6 @@ exports.remove = function*(id) {
  */
 exports.create = function*() {
     var input = yield parse(this);
-    console.log(input);
     var d = new Date();
     yield todos.insert({
         name: input.name,
