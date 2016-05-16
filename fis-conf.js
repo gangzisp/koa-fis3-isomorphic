@@ -3,6 +3,7 @@
 // fis.project.setProjectRoot('src');
 // fis.processCWD = fis.project.getProjectPath()
 
+var dist = '../dist';
 fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
