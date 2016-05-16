@@ -147,11 +147,11 @@ fis.media('server')
     //     release: '$0',
     //     rExt: '.js'
     // })
-    // .match('asyncWidget/**.js', {
-    //     deploy: fis.plugin('local-deliver', {
-    //         to: './server/pages'
-    //     })
-    // })
+    .match('asyncWidget/**.js', {
+        deploy: fis.plugin('local-deliver', {
+            to: './server/pages'
+        })
+    })
     .match('**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
