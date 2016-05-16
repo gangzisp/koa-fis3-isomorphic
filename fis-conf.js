@@ -92,7 +92,7 @@ fis.match('libs/**.min.js', {
  * 开发
  */
 fis.media('server')
-    .match('/pages/*/*.html', {
+    .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
             to: serverDist
         })
