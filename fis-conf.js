@@ -14,25 +14,11 @@ fis.set('project.ignore', [
     'dev/**',
     'fis-conf.js',
     'package.json',
-    'README.md'
+    'README.md',
+    'MIT-LICENSE'
 ]);
 
-fis.match('**/_*.scss', {
-        release: false
-    })
-    .match('**.md', {
-        release: false
-    })
-    .match('package.json', {
-        release: false
-    })
-    .match('MIT-LICENSE', {
-        release: false
-    })
-    // .match('libs/**/*.html', {
-    //     release: false
-    // })
-    .match('libs/**.min.js', {
+fis.match('libs/**.min.js', {
         release: false
     })
     // .match('libs/**/*.js', {
@@ -99,7 +85,7 @@ fis.match('**/_*.scss', {
     .match('**.{js,tpl}', {
         // domain: 'http://7.url.cn/edu/activity/' + name
     })
-    .match('**.{css,scss,sass}', {
+    .match('pkg/**.{css,scss,sass}', {
         // domain: 'http://7.url.cn/efidu/activity/' + name
     })
     .match('::image', {
@@ -152,7 +138,7 @@ fis.media('server')
     //         to: './server/pages'
     //     })
     // })
-    .match('**.{css,scss,sass}', {
+    .match('pkg/**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './server/pages'
@@ -198,7 +184,7 @@ fis.media('dev')
     //         to: './server/pages'
     //     })
     // })
-    .match('**.{css,scss,sass}', {
+    .match('pkg/**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
             to: './dev'
@@ -244,7 +230,7 @@ fis.media('dist')
         release: '$0',
         rExt: '.js'
     })
-    .match('**.{css,scss,sass}', {
+    .match('pkg/**.{css,scss,sass}', {
         useHash: true,
         useSprite: true,
         optimizer: fis.plugin('clean-css'),
