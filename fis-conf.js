@@ -1,30 +1,34 @@
 // var name = 'fis3';
-
 // fis.project.setProjectRoot('src');
 // fis.processCWD = fis.project.getProjectPath()
 
-var dist = '../dist';
+var devDist = './dev';
+var dist = './dist';
+var serverDist = './server/pages';
+
 fis.set('project.md5Connector', '-');
 fis.hook('commonjs');
 
+/**
+ * 配置进行处理的目录或文件
+ */
 fis.set('project.ignore', [
     'server/**',
     'node_modules/**',
     '.git/**',
     '.svn/**',
     'dev/**',
+    'dist/**',
+    '**/_*.scss',
+    '**.md',
     'fis-conf.js',
     'package.json',
-    'README.md',
     'MIT-LICENSE'
 ]);
 
 fis.match('libs/**.min.js', {
         release: false
     })
-    // .match('libs/**/*.js', {
-    //     release: false
-    // })
     .match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
         isMod: true,
         rExt: 'js',
@@ -33,43 +37,25 @@ fis.match('libs/**.min.js', {
         release: '$1.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
         parser: fis.plugin('swig')
     })
-    // modules/index/tupu/index.js -> require('index/tupu/index');
-    .match(/^\/modules\/(.+)\.js$/, {
-        isMod: true,
-        id: '$1'
-    })
-    // 简化 modules同名引用
-    // modules/index/tupu/tupu.js -> require('index/tupu');
-    .match(/^\/modules\/((?:[^\/]+\/)*)([^\/]+)\/\2\.(js)$/i, {
-        id: '$1$2'
-    })
     .match(/^\/libs\/.+\/(.+)\.js$/i, {
+        packTo: '/libs/$1.js',
         isMod: true,
         id: '$1'
     })
-    .match(/^\/widget\/(.+)\/main\.js$/i, {
+    .match(/libs\/mod\/(mod)\.js$/i, {
+        packTo: '/libs/$1.js',
+        isMod: false
+    })
+    .match(/^\/(component|asyncComponent)\/(.+)\/main\.js$/i, {
         isMod: true,
-        id: '$1'
-    })
-    .match(/^\/widget\/.+\/.+\.js$/i, {
-        isMod: true
-    })
-    .match(/^\/asyncWidget\/(.+)\/.+\.js$/i, {
-        isMod: true,
-        id: '$1'
-    })
-    .match(/(mod|badjs|bj-report)\.js$/, { // 非模块
-        isMod: true
+        id: '$2'
     })
     .match('pages/**.js', {
         isMod: true
     })
-    // .match('*.{html,js}', { // 同名依赖
-    //     useSameNameRequire: true
-    // })
     .match('**.{scss,sass}', {
         parser: fis.plugin('node-sass', {
-            include_paths: ['modules/sass']
+            include_paths: ['libs', 'pages']
         }),
         rExt: '.css'
     })
@@ -86,24 +72,11 @@ fis.match('libs/**.min.js', {
     .match('**.{js,tpl}', {
         // domain: 'http://7.url.cn/edu/activity/' + name
     })
-    .match('pkg/**.{css,scss,sass}', {
+    .match('**.{css,scss,sass}', {
         // domain: 'http://7.url.cn/efidu/activity/' + name
     })
     .match('::image', {
         // domain: 'http://7.url.cn/edu/activity/' + name
-    })
-
-/**
- * 添加同步打包配置,libs和modules默认打包二级目录的文件
- */
-.match(/(libs|modules)\/(js\/)?.+\/(.+)\.js$/i, {
-        packTo: '/libs/$3.js',
-        isMod: true,
-        id: '$3'
-    })
-    .match(/libs\/mod\/(mod)\.js$/i, {
-        packTo: '/libs/$1.js',
-        isMod: false
     })
     .match('::package', { //smart 打包
         prepackager: fis.plugin('csswrapper'),
@@ -112,105 +85,77 @@ fis.match('libs/**.min.js', {
             output: 'pkg/${id}.min.js',
             jsAllInOne: false
         })]
-    });
+    });;
 
 
 /**
  * 开发
  */
 fis.media('server')
-    .match('/pages/*.html', {
+    .match('/pages/*/*.html', {
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     })
-    .match('{pkg, modules}/**.js', {
+    .match('/{pkg,libs,asyncComponent}/**.js', {
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     })
-    // .match('**.js', {
-    //     parser: fis.plugin('babel'),
-    //     release: '$0',
-    //     rExt: '.js'
-    // })
-
-// .match('asyncWidget/**.js', {
-//     deploy: fis.plugin('local-deliver', {
-//         to: './server/pages'
-//     })
-// })
-
-.match('asyncWidget/**.js', {
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.{css,scss,sass}', {
+    .match('/pkg/pages/*/**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     })
     .match('::image', {
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     })
     .match('**.{ttf, eot, tpl, png}', {
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     })
     .match('**.json', {
         deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: serverDist
         })
     });
-
 /**
  * 开发
  */
 fis.media('dev')
     .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     })
-    .match('{pkg, modules}/**.js', {
+    .match('/{pkg,libs,asyncComponent}/**.js', {
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     })
-    // .match('**.js', {
-    //     parser: fis.plugin('babel'),
-    //     release: '$0',
-    //     rExt: '.js'
-    // })
-    // .match('asyncWidget/**.js', {
-    //     deploy: fis.plugin('local-deliver', {
-    //         to: './server/pages'
-    //     })
-    // })
-    .match('pkg/**.{css,scss,sass}', {
+    .match('/pkg/pages/*/**.{css,scss,sass}', {
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     })
     .match('::image', {
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     })
     .match('**.{ttf, eot, tpl, png}', {
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     })
     .match('**.json', {
         deploy: fis.plugin('local-deliver', {
-            to: './dev'
+            to: devDist
         })
     });
 
@@ -221,110 +166,45 @@ fis.media('dev')
 fis.media('dist')
     .match('/pages/*.html', {
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
+            to: dist
         })
     })
-    .match('**.{js,tpl}', {
-        useHash: true,
-        optimizer: fis.plugin('uglify-js')
-    })
-    .match('{pkg, modules}/**.js', {
-        deploy: fis.plugin('local-deliver', {
-            to: './dist'
-        })
-    })
-    .match('**.js', {
+    .match('/{pkg,libs,asyncComponent}/**.js', {
         parser: fis.plugin('babel'),
-        release: '$0',
-        rExt: '.js'
+        optimizer: fis.plugin('uglify-js'),
+        deploy: fis.plugin('local-deliver', {
+            to: dist
+        })
     })
-    .match('pkg/**.{css,scss,sass}', {
+    .match('/pkg/pages/*/**.{css,scss,sass}', {
         useHash: true,
         useSprite: true,
         optimizer: fis.plugin('clean-css'),
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
+            to: dist
         })
     })
     .match('::image', {
         useHash: true,
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
+            to: dist
         })
     })
     .match('**.png', {
         useHash: true,
         optimizer: fis.plugin('png-compressor'),
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
+            to: dist
         })
     })
     .match('**.{ttf, eot}', {
         useHash: true,
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
+            to: dist
         })
     })
     .match('**.json', {
         deploy: fis.plugin('local-deliver', {
-            to: './dist'
-        })
-    });
-
-
-/**
- * 发布
- *  压缩、合并、文件指纹
- */
-fis.media('deploy')
-    .match('/pages/*.html', {
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.{js,tpl}', {
-        useHash: true,
-        optimizer: fis.plugin('uglify-js')
-    })
-    .match('{pkg, modules}/**.js', {
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.js', {
-        parser: fis.plugin('babel'),
-        release: '$0',
-        rExt: '.js'
-    })
-    .match('**.{css,scss,sass}', {
-        useHash: true,
-        useSprite: true,
-        optimizer: fis.plugin('clean-css'),
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('::image', {
-        useHash: true,
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.png', {
-        useHash: true,
-        optimizer: fis.plugin('png-compressor'),
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.{ttf, eot}', {
-        useHash: true,
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
-        })
-    })
-    .match('**.json', {
-        deploy: fis.plugin('local-deliver', {
-            to: './server/pages'
+            to: dist
         })
     });
