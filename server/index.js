@@ -21,14 +21,6 @@ app.use(serve('./pages'));
 // 路由中间件
 app.use(router.get('/index', routeMap.indexPage));
 
-app.use(router.get('/', routeMap.list));
-app.use(router.get('/todo/new', routeMap.add));
-app.use(router.get('/todo/:id', routeMap.show));
-app.use(router.get('/todo/delete/:id', routeMap.remove));
-app.use(router.get('/todo/edit/:id', routeMap.edit));
-app.use(router.post('/todo/create', routeMap.create));
-app.use(router.post('/todo/update', routeMap.update));
-
 // 创建服务器监听
 http.createServer(app.callback()).listen(3000);
 // app.listen(3000);
