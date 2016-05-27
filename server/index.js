@@ -52,10 +52,12 @@ router.use(session({
  * 页面路由设置
  */
 router.get('/index.html', routerMap.page.index);
+router.get('/main.html', routerMap.page.main);
 
 /**
  * api路由设置
  */
+router.get('/v1/report', routerMap.api.report);
 
 /**
  * 运行时错误处理，这里很重要
