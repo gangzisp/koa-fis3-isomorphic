@@ -50,6 +50,11 @@ fis.match('libs/**.min.js', {
         isMod: true,
         id: '$2'
     })
+    // 公共组件id匹配
+    .match(/^\/(component|asyncComponent)\/.+\/(.+)\/main\.js$/i, {
+        isMod: true,
+        id: '$2'
+    })
     .match('pages/**.js', {
         isMod: true
     })
@@ -86,7 +91,6 @@ fis.match('libs/**.min.js', {
             jsAllInOne: false
         })]
     });;
-
 
 /**
  * 开发

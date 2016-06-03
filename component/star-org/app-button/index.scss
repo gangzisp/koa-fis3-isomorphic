@@ -1,0 +1,26 @@
+
+.app-btn{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #fcfcfc;
+	border-top: 1px solid #eee;
+
+	.i-btn-wrap{
+
+		height: 3rem;
+	}
+
+	.ui-btn-lg{
+		height: 3rem;
+		line-height: 3rem;
+		font-size: 1.8rem;
+		border-radius: 2rem;
+		background-color: #31c27c;
+    	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(.5, #31c27c), to(#31c27c));
+	}
+	.ui-btn-lg:after, .ui-btn-lg:before{
+		border-radius: 3rem;
+		border: none;
+	}
+}

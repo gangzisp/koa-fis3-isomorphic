@@ -1,0 +1,18 @@
+
+<link rel="stylesheet" href="./index.scss">
+
+<script>
+
+require.async(['badjs'], function(badjs) {
+    badjs.init({
+        id: '2014'
+    });
+});
+
+require.async(['zepto', './main'], function($, main) {
+    main.init();
+});
+
+</script>
+
+
