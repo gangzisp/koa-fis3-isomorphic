@@ -1,6 +1,6 @@
 {
 	"apps": [{
-		"name": "datasite",
+		"name": "sample",
 		"script": "index.js",
 		"node_args": "–-harmony",
 		"watch": true,

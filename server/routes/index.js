@@ -1,17 +1,24 @@
 'use strict';
-
 /**
- * 统一路由入口层
+ * 中间件加载
  * @type {[type]}
  */
-const user = require('./user');
-const api = require('./api');
-const report = require('./report');
-const page = require('./page')
 
-module.exports = {
-    user: user,
-    api: api,
-    report: api,
-    page: page
-}
+const organization = require('../controller/organization');
+const api = require('../controller/api');
+
+const router = require('koa-router')();
+
+/**
+ * 轻社团主页
+ */
+
+router.get('/mobile/index/detail/id/:id/type/:type', organization.detailPage);
+router.get('/mobile/index/detail/id/:id/type/:type', organization.detailPage);
+
+router.get('/mobile/index/get_comment_list', api.getCommentList);
+
+router.get('/page/org-rank.html', organization.orgRank);
+router.get('/page/star-org.html', organization.starOrg);
+
+module.exports = router;

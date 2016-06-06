@@ -48,18 +48,14 @@ component.extends({
 		function _renderComment(data) {
 
 			var $el = $('#rankNormal');
-			console.log(data.rankList);
-			console.log(tpl({
-				data: data.rankList
-			}));
+
 			if (data.rankList.length) {
 				$el.append(tpl({
-					data: data.rankList
+					data: data
 				}));
 			}
 		}
 	}
-
 });
 
 module.exports = component;

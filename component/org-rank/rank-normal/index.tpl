@@ -1,5 +1,5 @@
-
-    {% for item in data %}
+{% for item in data.rankList %}
+    {% if loop.index > 3 %}
     <li class="ui-border-t ui-list-item">
         <h1 class="li-index">{{ loop.index + 4 }}</h1>
         <div class="ui-avatar">
@@ -11,4 +11,5 @@
         </div>
         <div class="ui-sign">昨天<span class="number">{{ item.sign }}</span>人签到</div>
     </li>
-    {% endfor %}
+    {% endif %}
+{% endfor %}

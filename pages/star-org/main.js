@@ -58,18 +58,18 @@ component.extends({
     _bindEvent: function(data) {
 
         var self = this;
+        var self = this;
+
         self.$el.on('click', '[data-href]', function() {
-            /**
-             * 按需加载处理方式
-             */
+            window.location.href = $(this).data('href');
 
             // 按需异步模块测试
-            require.async(['testMod'], function(Mod) {
+            /*require.async(['testMod'], function(Mod) {
                 Mod.init();
             });
             require.async(['testMod1'], function(Mod) {
                 Mod.init();
-            });
+            });*/
         });
     }
 });

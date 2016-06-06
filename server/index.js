@@ -4,13 +4,12 @@ const http = require('http');
 
 const koa = require('koa');
 const logger = require('koa-logger');
-const router = require('koa-router')();
 const serve = require('koa-static');
 const stylus = require('koa-stylus');
 
 const session = require('koa-session-redis3');
-
-const routerMap = require('./routes');
+const koaBody = require('koa-body');
+const router = require('./routes');
 
 // Create koa app
 const app = koa();
@@ -25,7 +24,7 @@ app.keys = ['xiaodao360'];
 app.use(session({
 	store: {
 		host: process.env.SESSION_PORT_6379_TCP_ADDR || '127.0.0.1',
-		port: process.env.SESSION_PORT_6379_TCP_PORT || 6379,
+		port: process.env.SESSION_PORT_6379_TCP_PORT || 6380,
 		ttl: 3600,
 		keySchema: 'your:schema',
 		key: 'XD:session'
@@ -33,31 +32,11 @@ app.use(session({
 }));
 
 
-app.on('error', function(err, ctx) {
-	log.error('server error', err, ctx);
-});
-
-// 路由中间件
-router.use(session({
-	store: {
-		host: process.env.SESSION_PORT_6379_TCP_ADDR || '127.0.0.1',
-		port: process.env.SESSION_PORT_6379_TCP_PORT || 6379,
-		ttl: 3600,
-		keySchema: 'your:schema',
-		key: 'XD:session'
+app.use(koaBody({
+	formidable: {
+		uploadDir: __dirname
 	}
 }));
-
-/**
- * 页面路由设置
- */
-router.get('/index.html', routerMap.page.index);
-router.get('/main.html', routerMap.page.main);
-
-/**
- * api路由设置
- */
-router.get('/v1/report', routerMap.api.report);
 
 /**
  * 运行时错误处理，这里很重要
@@ -68,8 +47,9 @@ app.on('error', function(err) {
 	log.error('server error', err);
 });
 
-
 app.use(router.routes());
+
+
 
 // 创建服务器监听
 http.createServer(app.callback()).listen(8085);

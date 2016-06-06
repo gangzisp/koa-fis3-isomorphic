@@ -6,7 +6,7 @@ define('testMod', function(require, exports, module) {
    */
   
   var localAjax = require('localAjax');
-  var testModTpl = require('testMod.tpl');
+  var testModTpl = require('testMod/index.tpl');
   
   module.exports = {
       init:  function() {

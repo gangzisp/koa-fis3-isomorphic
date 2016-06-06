@@ -20,9 +20,7 @@
 <!-- cdn域名预解析 -->
 <meta http-equiv="x-dns-prefetch-control" content="on">
 <link rel="dns-prefetch" href="http://cdn.source.com">
-<link rel="stylesheet" type="text/css" href="/pkg/pages/index/main_min.css">
-
-</head>
+<link rel="stylesheet" type="text/css" href="/pkg/pages/index/main_min.css"></head>
 <body>
 <script data-loader>/**
 * file: mod.js
@@ -213,7 +211,7 @@ require.alias = function(id) {
 return id.replace(/\.js$/i, '');
 };
 require.timeout = 5000;
-})(this);;require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"frozen":{"pkg":"p2","deps":["zepto"]},"pages/index/main.js":{"pkg":"p3","deps":["localAjax","search-bar","page-menu","dialog","banner-2","banner-3","slider","tab","panel-3"]},"localAjax":{"pkg":"p3","deps":["zepto","localStorage","md5"]},"search-bar":{"pkg":"p3","deps":["label-list"]},"page-menu":{"pkg":"p3","deps":["page-menu.tpl"]},"dialog":{"pkg":"p3"},"banner-2":{"pkg":"p3","deps":["banner-2.tpl"]},"banner-3":{"pkg":"p3","deps":["banner-3.tpl"]},"slider":{"pkg":"p3","deps":["slider.tpl"]},"tab":{"pkg":"p3","deps":["tab-recmend","tab-more"]},"panel-3":{"pkg":"p3","deps":["panel-3.tpl"]},"localStorage":{"pkg":"p3","deps":["zepto"]},"md5":{"pkg":"p3","deps":["zepto"]},"label-list":{"pkg":"p3","deps":["label-list.tpl"]},"page-menu.tpl":{"pkg":"p3"},"banner-2.tpl":{"pkg":"p3"},"banner-3.tpl":{"pkg":"p3"},"slider.tpl":{"pkg":"p3"},"tab-recmend":{"pkg":"p3","deps":["tab-recmend.tpl"]},"tab-more":{"pkg":"p3","deps":["tab-more.tpl"]},"panel-3.tpl":{"pkg":"p3"},"label-list.tpl":{"pkg":"p3"},"tab-recmend.tpl":{"pkg":"p3"},"tab-more.tpl":{"pkg":"p3"},"testMod":{"pkg":"p4","deps":["localAjax","testMod.tpl"]},"testMod.tpl":{"pkg":"p4"},"testMod1":{"pkg":"p4","deps":["localAjax","testMod1.tpl"]},"testMod1.tpl":{"pkg":"p4"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/frozen.min.js"},"p3":{"url":"/pkg/pages/index/main.js.min.js"},"p4":{"url":"/pkg/pages/index/main.js_async.min.js"}}});</script>
+})(this);;require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"pages/org-rank/main.js":{"pkg":"p2","deps":["localAjax","util","scrollload","rank-header","rank-top","rank-normal","org-rank/index.tpl","comBase"]},"localAjax":{"pkg":"p2","deps":["zepto","localStorage","md5"]},"util":{"pkg":"p2"},"scrollload":{"pkg":"p2","deps":["zepto"]},"rank-header":{"pkg":"p2","deps":["comBase","rank-header/index.tpl"]},"rank-top":{"pkg":"p2","deps":["comBase","rank-top/index.tpl"]},"rank-normal":{"pkg":"p2","deps":["comBase","scrollload","rank-normal/index.tpl"]},"org-rank/index.tpl":{"pkg":"p2"},"comBase":{"pkg":"p2"},"localStorage":{"pkg":"p2","deps":["zepto"]},"md5":{"pkg":"p2","deps":["zepto"]},"rank-header/index.tpl":{"pkg":"p2"},"rank-top/index.tpl":{"pkg":"p2"},"rank-normal/index.tpl":{"pkg":"p2"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/pages/org-rank/main.js.min.js"}}});</script>
 <div id="ui-search-bar" class="ui-searchbar-wrap ui-border-b ui-searchbar-fixed">
 <div class="ui-searchbar ui-border-radius">
 <i class="ui-icon-search"></i>
@@ -262,7 +260,7 @@ require.timeout = 5000;
 </div>
 <script></script>
 <!--
-@require "component/dialog/index.scss"
+@require "component/common/dialog/index.scss"
 -->
 <div id="ui-dialog" class="ui-dialog">
 <div class="ui-dialog-cnt">
@@ -332,7 +330,7 @@ require.timeout = 5000;
 </ul>
 </section>
 <!--
-@require "component/tab/index.scss"
+@require "component/common/tab/index.scss"
 -->
 <div class="ui-tab">
 <ul class="ui-tab-nav ui-border-b">
@@ -383,16 +381,14 @@ require.timeout = 5000;
 </div>
 <script></script>
 <script>
-
 require.async(['badjs'], function(badjs) {
 badjs.init({
-id: '2016'
+id: '2014'
 });
 });
-require.async(['zepto','frozen','pages/index/main'], function($, frozen, main) {
+require.async(['zepto','pages/org-rank/main'], function($, main) {
 main.init();
 });
-
 </script>
 </body>
 </html>

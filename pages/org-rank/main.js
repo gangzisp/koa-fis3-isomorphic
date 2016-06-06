@@ -52,20 +52,26 @@ component.extends({
     },
 
     _initComponent: function(data) {
-
         rankHeader.init(data);
-        rankTop.init(data.rankList.slice(0, 3));
-        rankNormal.init(data.rankList.slice(3, 6));
+        rankTop.init(data);
+        rankNormal.init(data);
 
     },
 
     _bindEvent: function(data) {
 
-        // var self = this;
+        var self = this;
+        self.$el.on('click', '[data-href]', function() {
+            window.location.href = $(this).data('href');
+        });
 
-        // scrollLoad(300, function(count) {
-        //     console.log(count);
-        // })
+        // 按需异步模块测试
+        /*require.async(['testMod'], function(Mod) {
+            Mod.init();
+        });
+        require.async(['testMod1'], function(Mod) {
+            Mod.init();
+        });*/
     }
 });
 
