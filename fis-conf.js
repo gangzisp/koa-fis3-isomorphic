@@ -29,12 +29,12 @@ fis.set('project.ignore', [
 fis.match('libs/**.min.js', {
         release: false
     })
-    .match(/.+\/(.+)\/.+\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
+    .match(/.+\/(.+)\/(.+)\.tpl$/, { // js 模版一律用 .tpl,可以使用[模块名.tpl]作为模板
         isMod: true,
         rExt: 'js',
-        id: '$1.tpl',
-        moduleId: '$1.tpl',
-        release: '$1.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
+        id: '$1/$2.tpl',
+        moduleId: '$1/$2.tpl',
+        release: '$1/$2.tpl', // 发布的后的文件名，避免和同目录下的 js 冲突
         parser: fis.plugin('swig')
     })
     .match(/^\/libs\/.+\/(.+)\.js$/i, {

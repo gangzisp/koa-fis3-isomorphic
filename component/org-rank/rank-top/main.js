@@ -1,29 +1,12 @@
+'use strict';
 /**
-    content string  ''  提示内容，用来填充模板
-    stayTime    int 1000    提示停留时间，过了这个时间自动隐藏，设置0则不自动隐藏
-    type    string  'info'  提示类型，可选info|warn|success
-    callback    funtion function(){}    回调函数，第一个参数指示回调类型，目前有两种show|hide
+ * 可以使用extends方法覆盖下列方法
+ * init(data) // 初始化方法
+ * _renderData(data) // 渲染数据方法
+ * _bindEvent() //事件绑定
  */
+var Component = require('comBase');
 var tpl = require('./index.tpl');
+var component = new Component($('#rankTop'), tpl);
 
-var tips = {
-    $el: $('#rankTop'),
-
-    init: function(data) {
-        if (window.r) {
-            this._renderData(data);
-        }
-        this._bindEvent();
-    },
-
-    _renderData: function(data) {
-        this.$el.html(tpl({
-            data: data
-        }));
-    },
-
-
-    _bindEvent: function() {}
-}
-
-module.exports = tips;
+module.exports = component;

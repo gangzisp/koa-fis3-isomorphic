@@ -3,15 +3,16 @@
  * 可以使用extends方法覆盖下列方法
  * init(data) // 初始化方法
  * _renderData(data) // 渲染数据方法
- * _bindEvent() //事件绑定
+ * _bindEvent()	//事件绑定
  */
-
 var Component = require('comBase');
-var scrollLoad = require('scrollload');
 
 var tpl = require('./index.tpl');
+var commentTpl = require('./comment.tpl');
 
-var component = new Component($('#rankNormal'), tpl);
+var scrollLoad = require('scrollload');
+
+var component = new Component($('#orgComment'), tpl);
 
 component.extends({
 
@@ -30,7 +31,7 @@ component.extends({
 
 	_loadMoreComment: function(count) {
 		$.localAjax({
-			url: '../mock/more-rank.json',
+			url: '../mock/more-comment.json',
 			method: 'get',
 			dataType: 'json',
 			data: {
@@ -47,19 +48,14 @@ component.extends({
 
 		function _renderComment(data) {
 
-			var $el = $('#rankNormal');
-			console.log(data.rankList);
-			console.log(tpl({
-				data: data.rankList
-			}));
-			if (data.rankList.length) {
-				$el.append(tpl({
-					data: data.rankList
+			var $el = $('#commentList');
+			if (data.comment.length) {
+				$el.append(commentTpl({
+					data: data
 				}));
 			}
 		}
 	}
-
 });
 
 module.exports = component;
