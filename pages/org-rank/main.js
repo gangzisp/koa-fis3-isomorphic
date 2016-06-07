@@ -4,7 +4,8 @@
  */
 
 var localAjax = require('localAjax');
-var util = require('util')
+var util = require('util');
+var wxshare = require('share');
 
 var scrollLoad = require('scrollload');
 var rankHeader = require('rank-header');
@@ -19,7 +20,6 @@ var component = new Component($('body'), tpl);
 window.r = util.url.getUrlParam('r');
 
 component.extends({
-
 
     init: function() {
         this._renderData();
@@ -55,7 +55,6 @@ component.extends({
         rankHeader.init(data);
         rankTop.init(data);
         rankNormal.init(data);
-
     },
 
     _bindEvent: function(data) {
@@ -72,6 +71,13 @@ component.extends({
         require.async(['testMod1'], function(Mod) {
             Mod.init();
         });*/
+
+        wxshare.start(wxJsConfig, {
+            title: '',
+            link: '',
+            desc: '',
+            imgUrl: ''
+        });
     }
 });
 

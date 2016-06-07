@@ -7,7 +7,7 @@
         <div class="desc">
             <h2>{{ item.name }}</h2>
             <h5><span>动态:{{ item.msg }}</span> / <span>关注:{{ item.follow }}</span></h5>
-            <div class="ui-sign">昨天<span class="number">{{ item.sign }}</span>人签到</div>
+            <div class="ui-sign"><span class="number">{{ item.sign }}</span>人签到</div>
         </div>
     </li>
     {% endif %}

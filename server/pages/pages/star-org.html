@@ -263,14 +263,25 @@ require.timeout = 5000;
 </div>
 </section>
 <script>
+var wxJsConfig = {
+"appid": "{{ wxJsConfig.appid }}",
+"timestamp": "{{ wxJsConfig.timestamp }}",
+"signature": "{{ wxJsConfig.signature }}",
+"noncestr": "{{ wxJsConfig.signature }}",
+"desc": "测试测试",
+"title": "测试测试",
+"link": location.href,
+"imgUrl": '//9.url.cn/edu/banner/img/b11f0256_760_300.jpg',
+"dataUrl": location.href
+};
 require.async(['badjs'], function(badjs) {
 badjs.init({
-id: '2016'
+id: '2018'
 });
 });
 require.async(['zepto','frozen','pages/star-org/main'], function($, frozen, main) {
 main.init();
 });
 </script>
-</body>
+<script type="text/javascript" charset="utf-8" src="http://192.168.95.1:8132/livereload.js"></script></body>
 </html>

@@ -7,39 +7,10 @@
 const render = require('../lib/render');
 const md5 = require('../lib/md5');
 const coRequest = require('co-request');
+const config = require('./common/config');
 
 /**
- * /
- * @param {[type]} req           [description]
- * @param {[type]} res           [description]
- * @yield {[type]} [description]
- */
-const indexPage = function*(req, res) {
-
-	let ctx = this;
-	let result = yield coRequest("http://localhost:3000/mock/indexPage.json");
-
-	try {
-		let response = result;
-		let data = JSON.parse(response.body).result;
-
-		ctx.body = yield render('pages/index', {
-			pageMenu: data.pageMenu,
-			keywords: data.keywords,
-			banner2: data.banner2,
-			banner3: data.banner3,
-			slider: data.slider,
-			tabRecmend: data.tabs.recmendList,
-			tabMore: data.tabs.moreList,
-			panel3: data.panel3
-		});
-	} catch (e) {
-		console.log(e);
-	}
-};
-
-/**
- * 详情页面路由处理
+ * 轻社团详情页面
  * @param {[type]} req           [description]
  * @yield {[type]} [description]
  */
@@ -104,19 +75,21 @@ const orgRank = function*(req, res) {
 	let ctx = this;
 	let result = yield coRequest("http://127.0.0.1:8085/mock/rank.json");
 
+	let wxJsConfig = yield config.getWxJsConfig(ctx);
+	console.log(wxJsConfig);
+
 	try {
 		let response = result;
 		let data = JSON.parse(response.body).result;
-
 
 		if (ctx.request.query.r) {
 			ctx.body = yield render('pages/org-rank');
 		} else {
 			ctx.body = yield render('pages/org-rank', {
-				data: data
+				data: data,
+				wxJsConfig: wxJsConfig
 			});
 		}
-
 	} catch (e) {
 		console.log(e);
 	}
@@ -130,6 +103,7 @@ const orgRank = function*(req, res) {
 const starOrg = function*(req, res) {
 	let ctx = this;
 	let result = yield coRequest("http://127.0.0.1:8085/mock/star.json");
+	console.log('obj');
 	try {
 		let response = result;
 		let data = JSON.parse(response.body).result;
@@ -144,7 +118,7 @@ const starOrg = function*(req, res) {
 	} catch (e) {
 		console.log(e);
 	}
-}
+};
 
 /**
  * 社团主页数据接口格式处理
@@ -188,8 +162,8 @@ function _formatData(data) {
 
 	return data;
 }
+
 module.exports = {
-	indexPage: indexPage,
 	detailPage: detailPage,
 	orgRank: orgRank,
 	starOrg: starOrg

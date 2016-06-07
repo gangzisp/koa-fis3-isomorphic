@@ -3,9 +3,16 @@
 
 <script>
 
+var wxJsConfig = {
+    "appid": "{{ wxJsConfig.appid }}",
+    "timestamp": "{{ wxJsConfig.timestamp }}",
+    "signature": "{{ wxJsConfig.signature }}",
+    "nonceStr": "{{ wxJsConfig.nonceStr }}"
+};
+
 require.async(['badjs'], function(badjs) {
     badjs.init({
-        id: '2014'
+        id: '2018'
     });
 });
 

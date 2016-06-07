@@ -33,8 +33,8 @@ const getWxJsConfig = function*(ctx) {
 
 	ticket = ticketRes.body && JSON.parse(ticketRes.body).ticket || '';
 
+	url = 'http://' + ctx.host + ctx.originalUrl;
 
-	url = 'http://' + ctx.host + ctx.path;
 	noncestr = _createNonceStr();
 	timestamp = _createTimeStamp();
 	signature = _calcSignature(ticket, noncestr, timestamp, url);

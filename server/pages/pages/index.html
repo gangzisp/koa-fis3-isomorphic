@@ -211,7 +211,7 @@ require.alias = function(id) {
 return id.replace(/\.js$/i, '');
 };
 require.timeout = 5000;
-})(this);;require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"pages/org-rank/main.js":{"pkg":"p2","deps":["localAjax","util","scrollload","rank-header","rank-top","rank-normal","org-rank/index.tpl","comBase"]},"localAjax":{"pkg":"p2","deps":["zepto","localStorage","md5"]},"util":{"pkg":"p2"},"scrollload":{"pkg":"p2","deps":["zepto"]},"rank-header":{"pkg":"p2","deps":["comBase","rank-header/index.tpl"]},"rank-top":{"pkg":"p2","deps":["comBase","rank-top/index.tpl"]},"rank-normal":{"pkg":"p2","deps":["comBase","scrollload","rank-normal/index.tpl"]},"org-rank/index.tpl":{"pkg":"p2"},"comBase":{"pkg":"p2"},"localStorage":{"pkg":"p2","deps":["zepto"]},"md5":{"pkg":"p2","deps":["zepto"]},"rank-header/index.tpl":{"pkg":"p2"},"rank-top/index.tpl":{"pkg":"p2"},"rank-normal/index.tpl":{"pkg":"p2"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/pages/org-rank/main.js.min.js"}}});</script>
+})(this);;require.resourceMap({"res":{"badjs":{"pkg":"p0","deps":["badjs-report"]},"badjs-report":{"pkg":"p0"},"zepto":{"pkg":"p1"},"pages/org-rank/main.js":{"pkg":"p2","deps":["localAjax","util","share","scrollload","rank-header","rank-top","rank-normal","org-rank/index.tpl","comBase"]},"localAjax":{"pkg":"p2","deps":["zepto","localStorage","md5"]},"util":{"pkg":"p2"},"share":{"pkg":"p2"},"scrollload":{"pkg":"p2","deps":["zepto"]},"rank-header":{"pkg":"p2","deps":["comBase","rank-header/index.tpl"]},"rank-top":{"pkg":"p2","deps":["comBase","rank-top/index.tpl"]},"rank-normal":{"pkg":"p2","deps":["comBase","scrollload","rank-normal/index.tpl"]},"org-rank/index.tpl":{"pkg":"p2"},"comBase":{"pkg":"p2"},"localStorage":{"pkg":"p2","deps":["zepto"]},"md5":{"pkg":"p2","deps":["zepto"]},"rank-header/index.tpl":{"pkg":"p2"},"rank-top/index.tpl":{"pkg":"p2"},"rank-normal/index.tpl":{"pkg":"p2"}},"pkg":{"p0":{"url":"/pkg/badjs.min.js"},"p1":{"url":"/pkg/zepto.min.js"},"p2":{"url":"/pkg/pages/org-rank/main.js.min.js"}}});</script>
 <div id="ui-search-bar" class="ui-searchbar-wrap ui-border-b ui-searchbar-fixed">
 <div class="ui-searchbar ui-border-radius">
 <i class="ui-icon-search"></i>
@@ -381,14 +381,20 @@ require.timeout = 5000;
 </div>
 <script></script>
 <script>
+var wxJsConfig = {
+"appid": "{{ wxJsConfig.appid }}",
+"timestamp": "{{ wxJsConfig.timestamp }}",
+"signature": "{{ wxJsConfig.signature }}",
+"nonceStr": "{{ wxJsConfig.nonceStr }}"
+};
 require.async(['badjs'], function(badjs) {
 badjs.init({
-id: '2014'
+id: '2018'
 });
 });
 require.async(['zepto','pages/org-rank/main'], function($, main) {
 main.init();
 });
 </script>
-</body>
+<script type="text/javascript" charset="utf-8" src="http://192.168.95.1:8132/livereload.js"></script></body>
 </html>
