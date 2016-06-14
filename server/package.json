@@ -15,10 +15,9 @@
     "koa",
     "test"
   ],
-  "author": "Philip Woods",
+  "author": "ouvenzhang",
   "license": "ISC",
   "dependencies": {
-    "bluebird": "^3.3.5",
     "co-monk": "~1.0.0",
     "co-request": "^1.0.0",
     "co-views": "~0.2.0",
