@@ -93,7 +93,7 @@ fis.match('libs/**.min.js', {
     });;
 
 /**
- * 开发
+ * 服务端开发
  */
 fis.media('server')
     .match('/pages/*.html', {
@@ -127,8 +127,58 @@ fis.media('server')
             to: serverDist
         })
     });
+
 /**
- * 开发
+ * 服务端部署
+ */
+fis.media('deploy')
+    .match('/pages/*.html', {
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('/{pkg,libs,asyncComponent}/**.js', {
+        // parser: fis.plugin('babel'),
+        useHash: true,
+        optimizer: fis.plugin('uglify-js'),
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('/pkg/pages/*/**.{css,scss,sass}', {
+        useHash: true,
+        useSprite: true,
+        optimizer: fis.plugin('clean-css'),
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('::image', {
+        useHash: true,
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('**.png', {
+        useHash: true,
+        optimizer: fis.plugin('png-compressor'),
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('**.{ttf, eot, tpl}', {
+        useHash: true,
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    })
+    .match('**.json', {
+        deploy: fis.plugin('local-deliver', {
+            to: serverDist
+        })
+    });
+/**
+ * 前端开发
  */
 fis.media('dev')
     .match('/pages/*.html', {
@@ -164,8 +214,8 @@ fis.media('dev')
     });
 
 /**
- * 发布
- *  压缩、合并、文件指纹
+ * 前端发布
+ * 
  */
 fis.media('dist')
     .match('/pages/*.html', {
