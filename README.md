@@ -17,13 +17,14 @@
 * fis3-parser-babel
 * fis3-parser-swig
 * fis3-packager-smart
+* fis3-optimizer-htmlminify
 
 #### 2、安装环境插件
 
 注意安装0.12大版本的node，高版本的问题较多，可能报node-sass绑定错误
 
 ```
-npm install -g fis3 fis3-hook-commonjs fis3-postpackager-loader fis3-postprocessor-extras_uri fis-parser-imweb-tpl fis-parser-imweb-tplv2 fis-postprocessor-autoprefixer fis-prepackager-csswrapper fis3-parser-babel fis-postpackager-iconfont fis3-packager-smart fis3-parser-node-sass fis3-parser-babel fis3-parser-swig fis-prepackager-csswrapper fis3-packager-smart
+npm install -g fis3 fis3-hook-commonjs fis3-postpackager-loader fis3-postprocessor-extras_uri fis-parser-imweb-tpl fis-parser-imweb-tplv2 fis-postprocessor-autoprefixer fis-prepackager-csswrapper fis3-parser-babel fis-postpackager-iconfont fis3-packager-smart fis3-parser-node-sass fis3-parser-babel fis3-parser-swig fis-prepackager-csswrapper fis3-packager-smart fis3-optimizer-htmlminify
 ```
 
 #### 3、前端编译

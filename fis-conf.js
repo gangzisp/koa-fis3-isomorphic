@@ -133,6 +133,7 @@ fis.media('server')
  */
 fis.media('deploy')
     .match('/pages/*.html', {
+        optimizer: fis.plugin("htmlminify"),
         deploy: fis.plugin('local-deliver', {
             to: serverDist
         })
@@ -219,6 +220,7 @@ fis.media('dev')
  */
 fis.media('dist')
     .match('/pages/*.html', {
+        optimizer: fis.plugin("htmlminify"),
         deploy: fis.plugin('local-deliver', {
             to: dist
         })
