@@ -6,10 +6,10 @@
     "url": "https://github.com/Elzair/koa-mongodb-example"
   },
   "description": "A solution",
-  "main": "index.js",
+  "main": "test.js",
   "scripts": {
-    "test": "nodemon --harmony index.js",
-    "start": "node --harmony index.js"
+    "test": "nodemon --harmony test.js",
+    "start": "node --harmony test.js"
   },
   "keywords": [
     "koa",

@@ -1,44 +1,0 @@
-/* /component/common/dialog/index.scss *//* /component/common/tab/index.scss */.ui-tab .ui-list {
-  min-height: 360px; }
-/* /component/common/search-bar/index.scss */.ui-searchbar-fixed {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 99; }
-/* /component/common/label-list/index.scss */.ui-label-panel {
-  position: fixed;
-  width: 100%;
-  z-index: 90;
-  display: block;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  top: -150px;
-  background-color: #fff; }
-
-.ui-label-panel.show {
-  top: 44px; }
-/* /component/common/page-menu/index.scss *//* /component/common/slider/index.scss *//* /component/common/banner-2/index.scss */.ui-banner-2 {
-  margin: 20px 0;
-  padding: 10px 0;
-  overflow: hidden; }
-  .ui-banner-2 .ui-border-t {
-    float: left;
-    padding: 0 10px;
-    box-sizing: border-box;
-    margin-left: 0;
-    width: 50%;
-    background-image: none; }
-  .ui-banner-2 .ui-list-img {
-    width: 60px;
-    height: 60px; }
-  .ui-banner-2 .ui-list-info {
-    padding: 0; }
-    .ui-banner-2 .ui-list-info .ui-nowrap {
-      font-size: 12px; }
-/* /component/common/banner-3/index.scss */.ui-banner-3 .ui-grid-trisect-img {
-  padding-top: 60%; }
-/* /component/common/loading/index.scss *//* /component/common/panel-3/index.scss */.ui-panel {
-  margin: 20px 0;
-  padding: 10px 0;
-  overflow: hidden; }
-/* /pages/org-rank/index.scss */
