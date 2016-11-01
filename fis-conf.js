@@ -4,6 +4,7 @@
 
 var devDist = './dev';
 var dist = './dist';
+var serverDev = './server/dev';
 var serverDist = './server/pages';
 
 fis.set('project.md5Connector', '-');

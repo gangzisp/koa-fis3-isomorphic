@@ -6,6 +6,8 @@ ehthumbs.db
 Desktop.ini
 **/node_modules
 redis
+node_modules
+server/pages
 
 # Folder config file
 dist
