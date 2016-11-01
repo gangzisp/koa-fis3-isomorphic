@@ -1,4 +1,5 @@
 
+
 # koa + fis3 + swig 前后端同构方案
 
 [架构设计文章](https://ouvens.github.io/frontend-build/2016/04/21/koa-fis3-swig-nodejs-isomorphic.html)
@@ -21,11 +22,12 @@
 
 #### 2、安装环境插件
 
-注意安装0.12大版本的node，高版本的问题较多，可能报node-sass绑定错误
+注意安装0.12大版本的node，高版本的问题较多，可能报node-sass绑定错误，使用`npm install fis3-parser-node-sass --unsafe_perm`安装
 
 ```
 npm install -g fis3 fis3-hook-commonjs fis3-postpackager-loader fis3-postprocessor-extras_uri fis-parser-imweb-tpl fis-parser-imweb-tplv2 fis-postprocessor-autoprefixer fis-prepackager-csswrapper fis3-parser-babel fis-postpackager-iconfont fis3-packager-smart fis3-parser-node-sass fis3-parser-babel fis3-parser-swig fis-prepackager-csswrapper fis3-packager-smart fis3-optimizer-htmlminify
 ```
+
 
 #### 3、前端编译
 这里提供了component管理的三种打包方式：

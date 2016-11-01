@@ -15,6 +15,7 @@ dev
 
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
+server/pages
 
 # Windows Installer files
 *.cab
