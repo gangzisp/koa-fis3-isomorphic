@@ -60,7 +60,6 @@ const main = function*(req, res) {
     }
 };
 
-
 module.exports = {
     index: index,
     main: main

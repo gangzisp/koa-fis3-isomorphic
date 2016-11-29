@@ -17,5 +17,4 @@ router.get('/org-rank.html', organization.orgRank);
 router.get('/star-org.html', organization.starOrg);
 router.get('/index.html', page.index);
 
-
 module.exports = router;
