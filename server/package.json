@@ -30,10 +30,14 @@
     "koa-session-redis3": "^1.3.3",
     "koa-static": "~1.4.3",
     "koa-stylus": "0.0.3",
+    "lodash": "^4.13.1",
+    "log4js": "^0.6.37",
     "monk": "~0.8.1",
+    "node-inspector": "^0.12.8",
     "nodemon": "^1.9.1",
     "pm2": "^1.1.3",
-    "swig": "~1.3.2"
+    "swig": "~1.3.2",
+    "vue-server-renderer": "^2.0.8"
   },
   "devDependencies": {}
 }

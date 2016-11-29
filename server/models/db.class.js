@@ -44,10 +44,10 @@ function DB(dbname) {
 	 * @yield {[type]} [description]
 	 */
 
-	this.find = function*(obj, sort) {
+	this.find = function*(obj, query) {
 		let result;
-		if (sort) {
-			result = yield this.db.find(obj, sort);
+		if (query) {
+			result = yield this.db.find(obj, query);
 		} else {
 			result = yield this.db.find(obj);
 		}
@@ -91,6 +91,28 @@ function DB(dbname) {
 	 */
 	this.remove = function*(condition) {
 		let result = yield this.db.remove(condition);
+		return result;
+	}
+
+	/**
+	 * 数据库去重操作
+	 * @param {[type]} condition     [description]
+	 * @param {[type]} query         [description]
+	 * @yield {[type]} [description]
+	 */
+	this.distinct = function*(condition, query) {
+		let result = yield this.db.distinct(condition, query);
+		return result;
+	}
+
+	/**
+	 * 数据库统计操作
+	 * @param {[type]} condition     [description]
+	 * @param {[type]} query         [description]
+	 * @yield {[type]} [description]
+	 */
+	this.count = function*(condition) {
+		let result = yield this.db.count(condition);
 		return result;
 	}
 }

@@ -4,11 +4,22 @@
  * @type {[type]}
  */
 
-const organization = require('../controller/organization');
-
+const api = require('../controller/api');
+const page = require('../controller/page');
 const router = require('koa-router')();
 
-router.get('/rank_list.html', organization.orgRank);
-router.get('/rank_detail.html', organization.starOrg);
+// 默认跳转登录页或404页面
+router.get('/login.html', page.login); //用户登陆页
+
+router.get('/index.html', page.index);
+
+// 同构样例地址，使用r=1区分前后台渲染
+router.get('/org_rank.html', page.orgRank);
+router.get('/org_detail.html', page.orgDetail);
+
+router.get('/react.html', page.react);
+
+router.post('/api/v1/user/auth', api.userAuth); // 用户登录接口
+router.get('/api/v1/user/logout', api.userLogout); // 用户退出登录接口
 
 module.exports = router;

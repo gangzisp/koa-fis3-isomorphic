@@ -13,9 +13,10 @@ module.exports = {
      */
     _setData: function(data) {
         var self = this;
+
         self.data = {
-            title: data.title || document.title,
-            desc: data.desc || $('meta[itemprop=description]').attr('content'),
+            title: data.title || $('meta[itemprop=name]').attr('content') || document.title,
+            desc: data.desc || $('meta[itemprop=description]').attr('content') || document.title,
             link: data.link || location.href,
             imgUrl: data.imgUrl || $('meta[itemprop=image]').attr('content'),
 
@@ -24,6 +25,13 @@ module.exports = {
             success: self.success,
             cancel: self.cancel
         };
+
+        var shareCfg = {
+            title: self.data.title,
+            thumb: self.data.imgUrl,
+            targetUrl: self.data.link,
+            content: self.data.desc,
+        }
 
         //深度克隆
         self.QQData = JSON.stringify(self.data);

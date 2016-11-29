@@ -1,5 +1,10 @@
 /**
- * nodejs端web开发常见工具类
+ * filename: util.js
+ * author: ouvenzhang
+ * description: 提供常见的的工具函数集，主要包含:
+ *     getDay()：获取中文星期数
+ *     formatTime()：获取格式化后的时间
+ *     ...
  */
 
 'use strict';
@@ -12,7 +17,8 @@ let util = {
 	session: emptyObject,
 	cookie: emptyObject,
 	html: emptyObject,
-	string: emptyObject
+	string: emptyObject,
+	extend: _extend
 }
 
 /**
@@ -34,7 +40,7 @@ util.html.htmlDecode = _htmlDecode;
 util.html.toRaw = _toRaw;
 
 util.string.json2str = _json2str;
-
+util.string.str2json = _str2json;
 
 function _format(format, timestamp) {
 
@@ -51,6 +57,11 @@ function _format(format, timestamp) {
 	return format.replace(/y+/ig, year).replace(/m+/ig, month).replace(/d+/ig, date).replace(/h+/ig, hour).replace(/i+/ig, minite).replace(/s+/ig, second);
 }
 
+/**
+ * 获取星期
+ * @param  {[type]} timestamp [输入的时间戳]
+ * @return {[type]}           [返回星期中文表示]
+ */
 function _getDay(timestamp) {
 	const Day = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'];
 	return Day[timestamp.getDay()];
@@ -88,11 +99,35 @@ function _toRaw(str) {
 }
 
 function _json2str(json) {
-	var arr = [];
-	for (var key in json) {
+	let arr = [];
+	for (let key in json) {
 		arr.push(key + '=' + json[key]);
 	}
 	return arr.join('&');
 }
 
+function _str2json(string) {
+	let url = string; //获取url中"?"符后的字串
+	let obj = {};
+	let str;
+	if (url && url.indexOf("?") != -1) {
+		str = url.split('?')[1];
+	}
+	if (str) {
+		let strs = str.split("&");
+		for (let i = 0; i < strs.length; i++) {
+			obj[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+		}
+		return obj;
+	} else {
+		return {}
+	}
+}
+
+function _extend(oldObject, object) {
+	for (let item in object) {
+		oldObject[item] = object[item];
+	}
+	return oldObject;
+}
 module.exports = util;

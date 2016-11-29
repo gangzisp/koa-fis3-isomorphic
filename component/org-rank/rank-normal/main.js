@@ -13,7 +13,7 @@ var tpl = require('./index.tpl');
 
 var component = new Component($('#rankNormal'), tpl);
 
-component.extends({
+component.extend({
 
 	_bindEvent: function() {
 		var self = this;

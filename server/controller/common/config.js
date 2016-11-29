@@ -6,10 +6,6 @@ const coRequest = require("co-request");
 const APP_ID = 'wx80792921613f141d';
 const SECRET = 'c053bd3e1d2bb098f3ce46e2c4552698';
 
-const oAuthHeader = {
-	Authorization: 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiIsImp0aSI6IjU3MjA3YzdmNzBlMWUifQ.eyJpc3MiOiJhcGkueGlhb2RhbzM2MC5jb20iLCJqdGkiOiI1NzIwN2M3ZjcwZTFlIiwiaWF0IjoxNDYxNzQ2ODE1LCJleHAiOjE0OTMyODI4MTUsIm1pZCI6OTU0ODMsInBsYXRmb3JtIjozLCJ0b2tlbl90eXBlIjoiQmVhcmVyIn0._DWpwiqvTbaYNhbGC4qQT_iIW63XR72OWY-iEPXNeSw'
-};
-
 /**
  * 获取微信分享签名api
  * @param {[type]} ctx           [description]
@@ -65,24 +61,34 @@ const getWxJsConfig = function*(ctx) {
 
 		return shaObj.getHash('HEX');
 	}
-
 	return wxJsConfig;
 }
 
 /**
- * 域名域名白名单设置
- * @type {Array}
+ * 获取新API域名地址路径
+ * @param  {[type]} ctx [description]
+ * @return {[type]}     [description]
  */
-const domains = [
-	'127.0.0.1',
-	'127.0.0.1:8086',
-	'www.xiaodao360.com',
-	'test.xiaodao360.cn',
-	'www.xiaodaowang.cn'
-];
+const getPath = function(ctx) {
+	let path;
+	return 'http://' + ctx.host;
+};
+
+const minifyConfig = {
+	minifyJS: true,
+	minifyURLs: true,
+	minifyCSS: true,
+	removeAttributeQuotes: false,
+	removeComments: true,
+	sortClassName: true,
+	removeTagWhitespace: true,
+	collapseInlineTagWhitespace: true,
+	collapseWhitespace: true, //
+	preserveLineBreaks: false, //压缩成一行，需要collapseWhitespace=true时生效
+};
 
 module.exports = {
-	oAuthHeader: oAuthHeader,
+	getPath: getPath,
 	getWxJsConfig: getWxJsConfig,
-	domains: domains
+	minifyConfig: minifyConfig
 }

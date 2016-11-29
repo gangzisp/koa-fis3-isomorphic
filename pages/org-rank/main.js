@@ -19,7 +19,7 @@ var component = new Component($('body'), tpl);
 // window.r 用于判断是否使用浏览器端拉数据渲染，有r且含有值则使用浏览器端渲染
 window.r = util.url.getUrlParam('r');
 
-component.extends({
+component.extend({
 
     init: function() {
         this._renderData();

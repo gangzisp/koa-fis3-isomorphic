@@ -62,7 +62,7 @@ function Component($el, tpl) {
  * @param  {[type]} obj [description]
  * @return {[type]}     [description]
  */
-Component.prototype.extends = function(obj) {
+Component.prototype.extend = function(obj) {
 	for (var item in obj) {
 		this[item] = obj[item];
 	}
