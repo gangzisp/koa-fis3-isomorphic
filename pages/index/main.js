@@ -24,12 +24,14 @@ var getUrlParam = function(name) {
     return null; //返回参数值
 };
 
-window.r = getUrlParam('r') || 1;
+
+window.r = getUrlParam('r');
 
 var page = {
     $el: $('body'),
     init: function() {
         var self = this;
+
         if (window.r) {
             self._renderData();
         } else {
@@ -44,16 +46,17 @@ var page = {
 
     _ajaxData: function() {
         var self = this;
-        $.ajax({
+
+        $.localAjax({
             url: '../mock/indexPage.json',
-            type: 'get',
+            method: 'get',
             dataType: 'json',
             data: {},
-            success: function(data) {
+            done: function(data) {
                 self._initComponent(data.result);
                 self._bindEvent();
             },
-            error: function(msg) {
+            fail: function(msg) {
                 dialog.init();
             }
         });
@@ -74,29 +77,19 @@ var page = {
     _bindEvent: function(data) {
         var self = this;
 
-        self.$el.on('click', 'a, [data-href]', function(e) {
+        self.$el.on('click', '[data-href]', function() {
             /**
              * 按需加载处理方式
              */
-            e.preventDefault();
-            var url = $(this).data('href') || $(this).attr('href');
-
-            // cordova.InAppBrowser.open 已经重写了window.open，使用新的WebView打开
-            if (typeof cordova !== 'undefined' && cordova.InAppBrowser && cordova.InAppBrowser.open) {
-
-                var ref = cordova.InAppBrowser.open(url, '_blank', 'location=no,zoom=no,toolbar=yes,toolbarposition=top,closebuttoncaption=关闭');
-
-            } else {
-                window.location.href = url;
-            }
+            // window.location.href = $(this).data('href');
 
             /*异步模块测试*/
-            // require.async(['testMod'], function(Mod) {
-            //     Mod.init();
-            // });
-            // require.async(['testMod1'], function(Mod) {
-            //     Mod.init();
-            // });
+            require.async(['testMod'], function(Mod) {
+                Mod.init();
+            });
+            require.async(['testMod1'], function(Mod) {
+                Mod.init();
+            });
 
         });
     }
