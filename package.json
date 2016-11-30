@@ -1,11 +1,11 @@
 {
-	"name": "project",
-	"version": "0.0.1",
-	"dependencies": {
-		"fis-parser-react": "^0.13.3",
-		"fis3-hook-relative": "^1.0.9",
-		"fis3-parser-babel": "^1.2.4",
-		"fis3-parser-node-sass": "^0.1.9",
-		"fis3-parser-swig": "0.0.7"
-	}
+  "name": "project",
+  "version": "0.0.1",
+  "dependencies": {
+    "fis-parser-react": "^0.13.3",
+    "fis3-hook-relative": "^1.0.9",
+    "fis3-parser-babel": "^1.2.4",
+    "fis3-parser-react": "^1.0.0",
+    "fis3-parser-swig": "0.0.7"
+  }
 }
